@@ -43,5 +43,8 @@ module test();
         #80 e = ~e;
     always
         #160 f = ~f;
-
+    
+    initial begin
+        $monitor("%d %d %d %d %d %d %d %d", a, b, c, d, e, f, g, h, );
+    end
 endmodule // test
