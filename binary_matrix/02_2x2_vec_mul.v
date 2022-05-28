@@ -4,12 +4,12 @@
 /* In this module we define matrix vector multiplication for 2 x 2 matrices over
 the scaler field of the dihedral group D_2 of order 2 (multiplication and addition mod 2)
 
-D_2 actually forms a boolean algebra and hence we can use & for * and | for +.
+in D_2, 
+    multiplication corresponds to and
+    addition corresponds to xor
+
  */
 module matrix_vec_mul (
-    // u
-    output wire g,
-    output wire h,
 
     // 2x2 matrix M
     input wire a,
@@ -18,7 +18,11 @@ module matrix_vec_mul (
     input wire d,
 
     input wire e,
-    input wire f
+    input wire f,
+
+    // u
+    output wire g,
+    output wire h
 
     // u = M v
     );
@@ -26,6 +30,6 @@ module matrix_vec_mul (
     //|g| |a  b| |e|
     //| |=|    | | |
     //|h| |c  d| |f|
-    assign g = a & e | b & f;
-    assign h = c & e | d & f; 
+    assign g = (a && e) ^ (b && f);
+    assign h = (c && e) ^ (d && f); 
 endmodule // voter
