@@ -43,8 +43,37 @@ const mul_2 = (a, b) => (a * b) % 2
 const add_2 = (a, b) => (a + b) % 2
 const bin_matrix_vec_mul = mul_matrix_vec( mul_scal_vec(mul_2), add_vec_vec(add_2) )
 
-let I = [ [1, 1], [0, 1] ];
+let I = [ [1, 1], [0, 1] ]
 // 1 0
 // 1 1
+  
+const fs = require('fs');
 
-console.log(bin_matrix_vec_mul(I, [1, 0]))
+function two_by_two_bin_verifier(){ // verifies output of 2 x 2 binary matrix vec multiplication
+
+    fs.readFile('./test.txt', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        trials = data.split('\n');
+        trials.forEach(trial => {
+            const nums = trial.split(' ')
+            const M = [[nums[0], nums[2]], [nums[1], nums[3]]]
+            const v = [nums[4], nums[5]]
+
+            const vout = bin_matrix_vec_mul(M, v);
+
+            if (vout[0] != parseInt(nums[6]) | vout[1] != parseInt(nums[7])){
+                console.log('failed')
+                console.log(vout);
+                console.log(nums)
+                console.log()
+            }
+        })
+    });   
+}
+
+//console.log(bin_matrix_vec_mul(I, [1, 0]))
+
+two_by_two_bin_verifier();
