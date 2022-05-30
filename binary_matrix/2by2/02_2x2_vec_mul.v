@@ -32,4 +32,4 @@ module matrix_vec_mul (
     //|h| |c  d| |f|
     assign g = (a && e) ^ (b && f);
     assign h = (c && e) ^ (d && f); 
-endmodule // voter
+endmodule
