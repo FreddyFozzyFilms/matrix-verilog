@@ -20,9 +20,8 @@ in D_2,
 // n x n matrice * n vector
 // n x n matrice * n vector
 
-module dot_product (
+module dot_product ( v1, v2, d);
     parameter n = 3;
-    integer i;
 
     // module structure
     input wire [1:0] v1 [0:n-1]; // binary vector 
@@ -37,6 +36,8 @@ module dot_product (
     wire [1:0] u2 [0:n-1];
 
     // assign entry wise product to u1
+    genvar i;
+    generate
     for (i = 0; i < n; i = i + 1) begin
         assign u1[i] = v1[i] & v2[i];
     end
@@ -45,14 +46,14 @@ module dot_product (
     for (i = 1; i < n; i = i + 1) begin
         assign u2[i] = u2[i-1] ^ u1[i]; // use xor
     end
+    endgenerate
 
     assign d = u2[n-1];
 
 endmodule
 
-module matrix_vec_mul (
+module matrix_vec_mul (M, v, u);
     parameter n = 3;
-    integer i, j;
 
     // module structure
     input wire [1:0] M [0:n-1] [0:n-1]; // binary matrix
@@ -64,14 +65,17 @@ module matrix_vec_mul (
     wire [1:0] MT [0:n-1] [0:n-1]; // transposed matrix
 
     // transpose matrix
-    for (i = 0; i < n; i = i + 1) begin
-      for (j = 0; j < n; j = j + 1) begin
-          assign MT[i][j] = M[j][i]; // swap rows for column
+    genvar x, y;
+    generate
+    for (x = 0; x < n; x = x + 1) begin
+      for (y = 0; y < n; y = y + 1) begin
+          assign MT[x][y] = M[y][x]; // swap rows for column
       end
     end
 
     // take dot product of each row of M (each column of MT) with v
-    for (i = 0; i < n; i = i + 1) begin
-        dot_product U0(.v1(MT[i]), .v2(v), .d(u[i]));
+    for (x = 0; x < n; x = x + 1) begin
+        dot_product U0(.v1(MT[x]), .v2(v), .d(u[x]));
     end
+    endgenerate
 endmodule

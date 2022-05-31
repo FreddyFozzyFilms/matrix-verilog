@@ -21,7 +21,7 @@ module test();
         end
 
         for (i = 0; i < n; i = i + 1) begin
-            for (i = 0; i < n; i = i + 1) begin
+            for (j = 0; j < n; j = j + 1) begin
                 M[i][j] = 0;
             end
         end
@@ -37,23 +37,22 @@ module test();
     /* Generation of input patterns to simulate the UUT */
     // go through all possible values of M and v
 
-    index = 0;
-
     // vector v combinations
-    for (i = 0; i < n; i = i + 1) begin
+    genvar x, y;
+    generate
+    for (x = 0; x < n; x = x + 1) begin
         always
-            #(5 * 2**index) v[i] = ~v[i];
-        index = index + 1;
+            #(5 * 2**i) v[i] = ~v[i];
     end
 
     // all matrix M combinations
-    for (i = 0; i < n; i = i + 1) begin
-        for (j = 0; j < n; j = j + 1) begin
+    for (x = 0; x < n; x = x + 1) begin
+        for (y = 0; y < n; y = y + 1) begin
             always
-                #(5 * 2**index) M[i][j] = ~M[i][j];
-            index = index + 1;
+                #(5 * 2**(n-1 + i + j)) M[i][j] = ~M[i][j];
         end
     end
+    endgenerate
     
     // initial begin
     //     $monitor("%d %d %d %d %d %d %d %d", a, b, c, d, e, f, g, h, );
