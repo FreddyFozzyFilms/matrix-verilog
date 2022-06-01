@@ -15,7 +15,11 @@ for i in range(n):
 # declare vector out
 for i in range(n - 1):
     f.write(f"output wire u_{i}, \n")
-f.write(f"output wire u_{n-1}\n")
+f.write(f"output wire u_{n-1}\n);\n")
+
+for j in range(n):
+    for i in range(n):
+        f.write(f"assign u_{j} = A_")
 
 
 
