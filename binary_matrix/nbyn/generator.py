@@ -1,27 +1,29 @@
-f = open("vec_mul.v", "w")
+import sys
+n = int(sys.argv[1])
 
-n = 2
+fs = open("vec_mul.v", "w")
 
-f.write("module matrix_vec_mul ( \n")
+fs.write("module matrix_vec_mul ( \n")
 
 # declarations
 # declare matrix
 for i in range(n):
     for j in range(n):
-        f.write(f"input wire A_{i}_{j},\n")
+        fs.write(f"input wire A_{i}_{j},\n")
+fs.write("\n")
 # declare vector in
 for i in range(n):
-    f.write(f"input wire v_{i},\n")
+    fs.write(f"input wire v_{i},\n")
+fs.write("\n")
 # declare vector out
 for i in range(n - 1):
-    f.write(f"output wire u_{i}, \n")
-f.write(f"output wire u_{n-1}\n);\n")
+    fs.write(f"output wire u_{i}, \n")
+fs.write(f"output wire u_{n-1}\n);\n\n")
 
 for j in range(n):
-    for i in range(n):
-        f.write(f"assign u_{j} = A_")
-
-
-
-f.write("pigu\n")
-f.close()
+    fs.write(f"assign u_{j} = (A_{0}_{j} && v_{0})")
+    for i in range(1, n):
+        fs.write(f" ^ (A_{i}_{j} && v_{i})")
+    fs.write(";\n")
+fs.write("endmodule")
+fs.close()
