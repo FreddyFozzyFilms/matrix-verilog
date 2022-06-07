@@ -3,13 +3,14 @@ n = int(sys.argv[1])
 
 fs = open("vec_mul.v", "w")
 
+fs.write("`timescale 1ns / 1ps\n")
 fs.write("module matrix_vec_mul ( \n")
 
 # declarations
 # declare matrix
 for i in range(n):
     for j in range(n):
-        fs.write(f"input wire A_{i}_{j},\n")
+        fs.write(f"input wire A_{j}_{i},\n")
 fs.write("\n")
 # declare vector in
 for i in range(n):

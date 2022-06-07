@@ -51,6 +51,6 @@ module test();
         #160 v_1 = ~v_1;
     
     initial begin
-        $monitor("%d %d %d %d %d %d %d %d", A_0_0, A_0_1, A_1_0, A_1_1, v_0, v_1, u_0, u_1, );
+        $monitor("%d %d %d %d %d %d %d %d", A_0_0, A_0_1, A_1_0, A_1_1, v_0, v_1, u_0, u_1,);
     end
 endmodule // test

@@ -59,15 +59,16 @@ function two_by_two_bin_verifier(){ // verifies output of 2 x 2 binary matrix ve
         trials = data.split('\n');
         trials.forEach(trial => {
             const nums = trial.split(' ')
-            const M = [[nums[0], nums[2]], [nums[1], nums[3]]]
-            const v = [nums[4], nums[5]]
+            const M = [[nums[0], nums[3], nums[6]], [nums[1], nums[4], nums[7]], [nums[2], nums[5], nums[8]]]
+            const v = [nums[9], nums[10], nums[11]]
 
             const vout = bin_matrix_vec_mul(M, v);
 
-            if (vout[0] != parseInt(nums[6]) | vout[1] != parseInt(nums[7])){
+            if (vout[0] != parseInt(nums[12]) | vout[1] != parseInt(nums[13]) | vout[2] != parseInt(nums[14])){
                 console.log('failed')
                 console.log(vout);
-                console.log(nums)
+                console.log(M)
+                console.log(v)
                 console.log()
             }
         })
