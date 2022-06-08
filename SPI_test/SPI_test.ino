@@ -24,6 +24,6 @@ void loop(void){
   Mastersend = 0b11011101;                            
 
   Mastereceive=SPI.transfer(Mastersend); //Send the mastersend value to slave also receives value from slave
-  delay(1);
-
+  Serial.print(Mastereceive);
+  
 }
