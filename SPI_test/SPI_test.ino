@@ -19,11 +19,11 @@ void loop(void){
 
   digitalWrite(SS, LOW);                  //Starts communication with Slave connected to master
 
-  
+  `
 
   Mastersend = 0b11011101;                            
 
   Mastereceive=SPI.transfer(Mastersend); //Send the mastersend value to slave also receives value from slave
-  Serial.print(Mastereceive);
-  
+  delay(1);
+
 }
